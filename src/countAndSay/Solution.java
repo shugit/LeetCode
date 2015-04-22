@@ -21,12 +21,37 @@ public class Solution
 
 	public static void main(String[] args)
 	{
-		System.out.println(new Solution().countAndSay(1));
+		System.out.println(new Solution().countAndSay(10));
 	}
 
 	public String countAndSay(int n)
 	{
-
-		return null;
+		String[] array = new String[n];
+		array[0] = "1";
+		for(int i = 1; i<n; i++){
+			array[i] = count(array[i-1]);
+		}
+		return array[n-1];
 	}
+
+	private String count(String string)
+	{
+		String[] split = string.split("");
+		String result = "";
+		
+		String lastChar = split[0];
+		int count = 1;
+		for(int i = 1; i<split.length; i++){
+			if(split[i].equals(lastChar)){
+				count++;
+			} else{
+				result+=count+lastChar;
+				count = 1;
+				lastChar = split[i];
+			}
+		}
+		return result+count+lastChar;
+	}
+
+
 }
